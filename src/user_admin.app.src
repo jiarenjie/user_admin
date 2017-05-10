@@ -4,8 +4,11 @@
   {registered, []},
   {mod, { user_admin_app, []}},
   {applications,
-   [kernel,
-    stdlib
+   [kernel
+    ,stdlib
+    ,lager
+    ,erlydtl
+    ,cowboy
    ]},
   {env,[]},
   {modules, []},
