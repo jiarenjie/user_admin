@@ -29,7 +29,6 @@ init([]) ->
 handle_call(get_router, _From, State) ->
   Routes = [{"/user_admin/admin_require", admin_require_handler, []}
           ,{"/user_admin/user_require", user_require_handler, []}
-
   ],
 
   {reply, Routes, State}.
