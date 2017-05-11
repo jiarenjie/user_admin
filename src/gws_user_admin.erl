@@ -31,7 +31,9 @@ handle_call(get_router, _From, State) ->
           ,{"/user_admin/user_require", user_require_handler, []}
   ],
 
-  {reply, Routes, State}.
+  {reply, Routes, State};
+handle_call(_, _From, State) ->
+  {reply, ok, State}.
 
 handle_cast(_Request, State) ->
   {noreply, State}.

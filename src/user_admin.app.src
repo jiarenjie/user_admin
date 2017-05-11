@@ -9,6 +9,7 @@
     ,lager
     ,erlydtl
     ,cowboy
+    ,mnesia_wechat
    ]},
   {env,[]},
   {modules, []},
