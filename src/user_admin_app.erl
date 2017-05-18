@@ -16,6 +16,7 @@
 
 start(_StartType, _StartArgs) ->
     gws_user_admin:start_link(),
+    gws_auth_token:start_link(),
     user_admin_sup:start_link().
 
 %%--------------------------------------------------------------------

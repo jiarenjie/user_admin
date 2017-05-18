@@ -88,12 +88,12 @@ check_jwt(JWT) ->
     undefined->
       {fail,<<"99">>,<<"JWT不存在"/utf8>>};
     _->
-      JWT2 = jwt_utils:decode(JWT,<<"secret">>),
+      JWT2 = gws_auth_token:decode(JWT),
       case JWT2 of
-        {fail,_} ->
-          {fail,<<"99">>,<<"JWT验证失败"/utf8>>};
         {ok,Payload}->
-          {ok,payload,Payload}
+          {ok,payload,Payload};
+        _ ->
+          {fail,<<"99">>,<<"JWT验证失败"/utf8>>}
       end
   end.
 
@@ -101,7 +101,7 @@ fun_update_userinfo(Payload) ->
   try
     update_userinfo(Payload)
   catch
-      _:X  ->
+      _:_  ->
         throw({update_userinfo, <<"98">>, <<"数据更新失败/utf8">>})
   end.
 
@@ -129,6 +129,6 @@ reply_jwt(Payload) ->
     ,{<<"role">>,proplists:get_value(<<"role">>, Payload)}
     ,{<<"timestamp">>,Timestamp}
   ],
-  {ok,JWT} = jwt_utils:encode(Payload2, <<"secret">>),
+  {ok,JWT} = gws_auth_token:decode(Payload2),
   lager:debug("~n JWT = ~p~n", [JWT]),
   JWT.
